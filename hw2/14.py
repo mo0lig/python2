@@ -9,4 +9,4 @@ while a==True:
         a=False
 
 print("Sum of integers is:",sum)
-print("Average:",round((sum/(n-1)),2)) #үтірлен кейін 2 санға жуықтаймыз
+print("Average:",round((sum/(n-1)),2)) #үтірден кейін 2 санға жуықтаймыз
