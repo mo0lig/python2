@@ -1,5 +1,7 @@
+s=input().split()
 dic={}
-s=input()
+max=0
+a=''
 for i in s:
     k=dic.keys()
     if i in k:
@@ -7,6 +9,8 @@ for i in s:
     else:
         dic[i]=1
 for i in s:
-    if dic[i]==1:
-        print(i)
-        break
+    if dic[i]>max:
+        max=dic[i]
+        a=i
+    
+print(a,max)

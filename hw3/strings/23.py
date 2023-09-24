@@ -1,4 +1,3 @@
-x=int(input())
+x=input()
 a=len(x)
-print(a)
-print("{:0>ad}".format(x))
+print("0"*a + x)
