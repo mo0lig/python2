@@ -9,13 +9,11 @@ for i in a:
         dic[i]+=1
     else:
         dic[i]=1
-        list.append(i)
 for i in b:
     k=dic.keys()
     if i in k:
         dic[i]+=1
-    else:
-        dic[i]=1
         list.append(i)
+        
 list.sort()
 print(list)
