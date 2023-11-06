@@ -35,7 +35,25 @@ def check_email(email):
         return True
     else:
         return False
-    
+def check(name):
+    try:
+        db = pymysql.connect(
+            host="localhost",
+            port=3306,
+            user="root",
+            password='',
+            database="data",
+            cursorclass=pymysql.cursors.DictCursor)
+        print("Connected")
+        with db.cursor() as cursor:
+            com = "SELECT * FROM `users` WHERE `name`=%s"
+            info = cursor.execute(com,name)
+        if not info:
+            return True
+        else:
+            return False
+    except:
+        print("Error")
 def submit():
     n=name.get()
     e=email.get()
@@ -50,10 +68,10 @@ def submit():
         messagebox.showerror('Error','Enter your password')
     elif conpassword.get() == '':
         messagebox.showerror('Error','Please, again enter your password')
-    else:
+    else:  
         if p1!=p2:
             messagebox.showerror('Error','Please,Enter same passwords')
-        elif check_pas(p1) and check_email(e):
+        elif check_pas(p1) and check_email(e) and check(n):
             try:
                 db = pymysql.connect(
                     host="localhost",
@@ -62,7 +80,7 @@ def submit():
                     password='',
                     database="data",
                     cursorclass=pymysql.cursors.DictCursor)
-                print("Connected")
+                print("Connected")        
                 try:
                     with db.cursor() as cursor: 
                         insert = "INSERT INTO `users`(`name`,`email`,`password`) VALUES(%s,%s,%s)"
@@ -83,6 +101,8 @@ def submit():
                 messagebox.showerror('Error','Please, enter password in correct form')
             if not check_email(e):
                 messagebox.showerror('Error','Please, enter email in correct form')
+            if not check(n):
+                messagebox.showerror('Error','Please, enter another new name')
 
 fram=Frame(wind,width=500,height=500,bg=_from_rgb((210, 226, 255)),bd=8).place(x=0,y=0)
 #Getting data from entry
