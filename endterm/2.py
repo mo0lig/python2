@@ -1,40 +1,28 @@
-from copy import deepcopy
-def minor(matrix,i,j,n):
+def minor(m,i,j):
     mat=list()
     lis=[]
-    for k in range(n):
+    for k in range(len(m)):
         if k==i:
             continue
         else:
-            for s in range(n):
+            for s in range(len(m)):
                 if s==j:
                     continue
                 else:
-                    lis.append(matrix[k][s])
+                    lis.append(m[k][s])
             mat.append(lis)
             lis=[]
     return mat
-                
-def det(mat):
-    return (mat[0][0]*mat[1][1] - mat[0][1]*mat[1][0])
-def smaller_matrix(orig,row,column):
-    new=deepcopy(orig)
-    new.remove(orig[row])
-    for i in range(len(new)):
-        new[i].remove(new[i][column])
-    return new
-    
-def dt(matrix,n):
-    if n==1:
-        return matrix[0][0]
-    if n==2:
-        return (matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0])
-    if n>2:
-        answer=0
-        for j in range(n):
-            coofactor=(-1)**j * matrix[0][j] * dt(smaller_matrix(matrix,0,j),n)
-            answer+=coofactor
-        return answer
+
+def det(m):
+    if len(m)==1:
+        return m[0]
+    if len(m) == 2:
+        return m[0][0]*m[1][1]-m[0][1]*m[1][0]
+    determinant = 0
+    for c in range(len(m)):
+        determinant += ((-1)**c)*m[0][c]*det(minor(m,0,c))
+    return determinant
         
 n=int(input("nxn size of matrix:"))
 matrix=list()
@@ -45,4 +33,4 @@ for i in range(n):
         ll.append(x)
     matrix.append(ll)
     ll=[]
-print(dt(matrix,n))
+print(getMatrixDeternminant(matrix))
