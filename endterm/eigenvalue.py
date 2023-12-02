@@ -7,7 +7,6 @@ def eigenvals(A):
         for j in range(n):
             if A[i][j] == 0:
                 continue
-        # Handle the case where the matrix is not invertible
         try:
             det = determinant(A[:i + 1])
             inv = invert(A[:i + 1], det)
@@ -54,7 +53,6 @@ def eigenvects(A, eigenvalues):
             for j in range(n):
                 if A[i][j] == 0:
                     continue
-        # Handle the case where the matrix is not invertible
         try:
             inv = invert(A, eigenvalue)
             eigenvectors.append(inv)
