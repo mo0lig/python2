@@ -24,7 +24,7 @@ def ref(matrix):
         scale(matrix, pr, 1 / matrix[pr][pc])
         
       
-        for row in range(pivot_row + 1, num_rows):
+        for row in range(pr + 1, nr):
             add_row(matrix, pr, row, -matrix[row][pc])
        
         pc += 1
