@@ -4,33 +4,23 @@ def swap(matrix, i, j):
 def scale(matrix, row, scalar):
     matrix[row] = [scalar * element for element in matrix[row]]
 
-def add_row(matrix, sr, dr, scalar):
-    matrix[dr] = [matrix[dr][i] + scalar * matrix[sr][i] for i in range(len(matrix[0]))]
+def add_row(matrix, i, j, scalar):
+    for k in range(len(matrix[0])):
+        matrix[j][k] = matrix[j][k] + scalar * matrix[i][k]
 
 def ref(matrix):
-    nr, nc = len(matrix), len(matrix[0])
-    pc = 0  
-    
-    for pr in range(nr):
-       
-        while pc < nc and matrix[pr][pc] == 0:
-            pc += 1
-        
-        if pc == nc:
-          
-            continue
-        
-       
-        scale(matrix, pr, 1 / matrix[pr][pc])
-        
-      
-        for row in range(pr + 1, nr):
-            add_row(matrix, pr, row, -matrix[row][pc])
-       
-        pc += 1
-
+    row, column,numc = len(matrix), len(matrix[0]),0
+    for numr in range(row):
+        while numc < column and matrix[numr][numc] == 0:   
+            numc += 1
+        if numc == column:
+            continue   
+        scale(matrix, numr, 1 / matrix[numr][numc])
+        for i in range(numr + 1, row):
+            add_row(matrix, numr, i, -matrix[i][numc])
+        numc += 1
     return matrix
-
+                
 n=int(input("nxm size of matrix:"))
 m=int(input("nxm size of matrix:"))
 matrix=list()

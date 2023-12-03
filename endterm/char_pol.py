@@ -1,4 +1,5 @@
-import numpy as np
+from sympy import Symbol 
+from sympy import * 
 def minor(matrix,i,j):
     mat=list()
     lis=[]
@@ -52,8 +53,10 @@ for i in range(n):
             ll.append(0)
     identity.append(ll)
     ll=[]
+    
+t=Symbol("x")
 
-iden=multiply(identity, "t")
+iden=multiply(identity, t)
     
 for i in range(n):
     for j in range(n):
@@ -63,6 +66,6 @@ for i in range(n):
     ll=[]
     
 matrix=substract(matrix,iden)
-result=(-1)**n * dt(matrix)
+result=solve((-1)**n * dt(matrix))
 print(result)
 
