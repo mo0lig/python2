@@ -66,6 +66,6 @@ for i in range(n):
     ll=[]
     
 matrix=substract(matrix,iden)
-result=solve((-1)**n * dt(matrix))
+result=(-1)**n * dt(matrix)
 print(result)
 
