@@ -1,6 +1,6 @@
 def lu_decomposition(matrix):
     n = len(matrix)
-
+    
     L = [[1.0 if i == j else 0.0 for j in range(n)] for i in range(n)]
     U = []
     for i in range(n):
@@ -14,7 +14,10 @@ def lu_decomposition(matrix):
             U[i][k] = matrix[i][k] - sum(L[i][j] * U[j][k] for j in range(i))
 
         for k in range(i + 1, n):
-            L[k][i] = (matrix[k][i] - sum(L[k][j] * U[j][i] for j in range(i))) / U[i][i]
+            try:
+                L[k][i] = (matrix[k][i] - sum(L[k][j] * U[j][i] for j in range(i))) / U[i][i]
+            except ZeroDivisionError:
+                raise ValueError("Input matrix is singular.")
 
     return L, U
 
