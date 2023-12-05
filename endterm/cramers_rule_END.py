@@ -28,7 +28,18 @@ def dt(matrix):
 def get_sol(matrix,sol):
     l=list()
     for i in range(len(matrix)):
-        A = [matrix[j][:i] + [sol[j]] + matrix[j][i+1:] for j in range(n)]
+        A = []
+        for j in range(n):  
+            current= matrix[j]
+            modified= []
+            for index in range(len(current)):
+                if index < i:
+                    modified.append(current[index])
+                elif index == i:
+                    modified.append(sol[j])
+                else:
+                    modified.append(current[index])
+            A.append(modified)
         l.append(dt(A)/dt(matrix))
     for i in range(len(l)):
         print(f"x{i}={l[i]}")
