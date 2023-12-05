@@ -36,7 +36,11 @@ def multiply(matrix,coef):
 def inverse(matrix):
     if dt(matrix)==0:
         return ("Inverse does't exist.")
-    return multiply(transpose(coef(matrix)), 1/dt(matrix))
+    if n==1:
+        matrix[0][0]=1/matrix[0][0]
+        return matrix
+    else:
+        return multiply(transpose(coef(matrix)), 1/dt(matrix))
 
 n=int(input("nxn size of matrix:"))
 matrix=list()
