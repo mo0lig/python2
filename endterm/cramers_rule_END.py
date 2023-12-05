@@ -44,19 +44,22 @@ def get_sol(matrix,sol):
     for i in range(len(l)):
         print(f"x{i}={l[i]}")
         
-n=int(input("nxm size of matrix:"))
-m=int(input("nxm size of matrix:"))
+n=int(input("nxn size of matrix:"))
 matrix=list()
 ll=[]
 sol=list()
+print("Elements of main matrix:")
 for i in range(n):
-    for j in range(m):
+    for j in range(n):
         x=int(input(f"[{i}][{j}]="))
-        if j==m-1:
-            sol.append(x)
-        else:
-            ll.append(x)
+        
+        ll.append(x)
     matrix.append(ll)
     ll=[]
+print("Elements of solution:")
+for i in range(n):
+    for j in range(1):
+        x=int(input(f"[{i}][{j}]="))
+        sol.append(x)
 get_sol(matrix,sol)
 
