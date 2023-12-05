@@ -1,23 +1,20 @@
 def lu_decomposition(matrix):
     n = len(matrix)
 
-    # Initialize L as an identity matrix and U as a zero-filled matrix
-    L = [[0.0] * n for _ in range(n)]
-    U = [[0.0] * n for _ in range(n)]
+    L = [[1.0 if i == j else 0.0 for j in range(n)] for i in range(n)]
+    U = []
+    for i in range(n):
+        row = []
+        for j in range(n):
+            row.append(0.0)
+        U.append(row)
 
     for i in range(n):
-        # Upper triangular matrix
         for k in range(i, n):
-            sum_ = sum(L[i][j] * U[j][k] for j in range(i))
-            U[i][k] = matrix[i][k] - sum_
+            U[i][k] = matrix[i][k] - sum(L[i][j] * U[j][k] for j in range(i))
 
-        # Lower triangular matrix
-        for k in range(i, n):
-            if i == k:
-                L[i][i] = 1.0  # Diagonal elements of L are 1
-            else:
-                sum_ = sum(L[k][j] * U[j][i] for j in range(i))
-                L[k][i] = (matrix[k][i] - sum_) / U[i][i]
+        for k in range(i + 1, n):
+            L[k][i] = (matrix[k][i] - sum(L[k][j] * U[j][i] for j in range(i))) / U[i][i]
 
     return L, U
 
